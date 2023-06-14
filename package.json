@@ -13,7 +13,8 @@
   },
   "dependencies": {
     "@azure/functions": "^4.0.0-alpha.7",
-    "cowsay": "1.5.0"
+    "cowsay": "1.5.0",
+    "durable-functions": "3.0.0-alpha.4"
   },
   "devDependencies": {
     "@types/node": "^18.x",
