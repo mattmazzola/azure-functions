@@ -1,13 +1,26 @@
-# Azure Functions Testing
+# Azure Functions
+
+## Durable Functions
+
+- Orchestrator function
+    - describes a workflow that orchestrates other functions.
+- Activity function
+    - called by the orchestrator function, performs work, and optionally returns a value.
+- Client function
+    - a regular Azure Function that starts an orchestrator function. This example uses an HTTP triggered function.
+
+```powershell
+$durableFunctionBaseUrl = "http://localhost:7071/runtime/webhooks/durabletask"
+```
 
 ## Start Durable Function Orchestration
 
 https://learn.microsoft.com/en-us/azure/azure-functions/durable/durable-functions-http-api#start-orchestration
 
 ```powershell
-$durableFunctionResponse = $(Invoke-WebRequest -Method POST -Uri http://localhost:7071/runtime/webhooks/durabletask/orchestrators/fanOutFanInDemo)
+$durableFunctionResponse = $(Invoke-WebRequest -Method POST -Uri "$durableFunctionBaseUrl/orchestrators/fanOutFanInDemo")
 $instanceId = $(ConvertFrom-Json $durableFunctionResponse.Content).id
-$instanceId
+echo $instanceId
 ```
 
 ## Status of Durable Function Instance
@@ -15,9 +28,9 @@ $instanceId
 https://learn.microsoft.com/en-us/azure/azure-functions/durable/durable-functions-http-api#get-instance-status
 
 ```powershell
-$durableFunctionStatus = $(Invoke-WebRequest -Method GET -uri "http://localhost:7071/runtime/webhooks/durabletask/instances/$instanceId")
+$durableFunctionStatus = $(Invoke-WebRequest -Method GET -uri "$durableFunctionBaseUrl/instances/$instanceId")
 $durableFunctionStatusJson = $(ConvertFrom-Json $durableFunctionStatus.Content)
-$durableFunctionStatusJson
+echo $durableFunctionStatusJson
 ```
 
 ```
