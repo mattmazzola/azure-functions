@@ -2,6 +2,8 @@
 
 ## Durable Functions
 
+https://learn.microsoft.com/en-us/azure/azure-functions/durable/quickstart-ts-vscode?pivots=nodejs-model-v4
+
 - Orchestrator function
     - describes a workflow that orchestrates other functions.
 - Activity function
